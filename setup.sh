@@ -65,9 +65,7 @@ PKGS=(
 )
 
 for PKG in "${PKGS[@]}"; do
-    if ! [ -x "$(command -v $PKG)" ]; then
-        pacman -S "$PKG" --noconfirm --needed
-    fi
+    pacman -S "$PKG" --noconfirm --needed
 done
 
 # Install another package manager
