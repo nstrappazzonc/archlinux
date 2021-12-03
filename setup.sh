@@ -99,7 +99,7 @@ mkdir -p /home/nsc/.config/bspwm/
 mkdir -p /home/nsc/.config/sxhkd/
 
 chown -R nsc:users /home/nsc/*
-chmod -R 700 /home/nsc
+chmod -R 755 /home/nsc
 chmod 600 /home/nsc/.ssh/*
 
 # Configure
