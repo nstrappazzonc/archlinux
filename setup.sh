@@ -1,7 +1,25 @@
 #!/usr/bin/env bash
 set -e
 
-sudo pacman -Syu --noconfirm
+# Make sure only root can run our script
+if [[ $EUID -ne 0 ]]; then
+  echo "This script must be run as root"
+  exit 1
+fi
+
+sed -i 's/^#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
+locale-gen
+timedatectl --no-ask-password set-timezone Europe/Madrid
+timedatectl --no-ask-password set-ntp 1
+localectl --no-ask-password set-locale LANG="en_US.UTF-8" LC_TIME="en_US.UTF-8" LANGUAGE="en_US"
+
+# Set keymaps
+localectl --no-ask-password set-keymap us
+
+# Add no password rights
+sed -i 's/^# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/' /etc/sudoers
+
+pacman -Syu --noconfirm
 
 PKGS=(
     # Tools
@@ -43,7 +61,7 @@ PKGS=(
 )
 
 for PKG in "${PKGS[@]}"; do
-    sudo pacman -S "$PKG" --noconfirm --needed
+    pacman -S "$PKG" --noconfirm --needed
 done
 
 if ! [ -x "$(command -v yay)" ]; then
@@ -51,12 +69,15 @@ if ! [ -x "$(command -v yay)" ]; then
     git clone https://aur.archlinux.org/yay-git.git
     cd yay-git/
     makepkg -si
-    sudo yay -Syu
+    yay -Syu
     rm -rf /tmp/yay-git/
     cd
 fi
 
 # Graphics Drivers find and install
 if lspci | grep -E "Integrated Graphics Controller"; then
-    sudo pacman -S xf86-video-intel --needed --noconfirm
+    pacman -S xf86-video-intel --needed --noconfirm
 fi
+
+systemctl enable --now NetworkManager
+systemctl enable --now ntpd
