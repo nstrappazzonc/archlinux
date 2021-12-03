@@ -16,11 +16,13 @@ localectl --no-ask-password set-locale LANG="en_US.UTF-8" LC_TIME="en_US.UTF-8" 
 # Set keymaps
 localectl --no-ask-password set-keymap us
 
-# Add no password rights
-sed -i 's/^# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/' /etc/sudoers
+# Add sudo rights
+sed -i 's/^# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/' /etc/sudoers
 
+# Update database
 pacman -Syu --noconfirm
 
+# Install packages
 PKGS=(
     # Tools
     'acpi'
@@ -64,6 +66,7 @@ for PKG in "${PKGS[@]}"; do
     pacman -S "$PKG" --noconfirm --needed
 done
 
+# Install another package manager
 if ! [ -x "$(command -v yay)" ]; then
     cd /tmp/
     git clone https://aur.archlinux.org/yay-git.git
@@ -79,5 +82,6 @@ if lspci | grep -E "Integrated Graphics Controller"; then
     pacman -S xf86-video-intel --needed --noconfirm
 fi
 
+# Enable services
 systemctl enable --now NetworkManager
 systemctl enable --now ntpd
