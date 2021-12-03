@@ -86,24 +86,7 @@ fi
 systemctl enable --now NetworkManager
 systemctl enable --now ntpd
 
-# Configure Git
-git config --global user.email "nstrappazzonc@gmail.com"
-git config --global user.name "Nicola Strappazzon C"
-git config pull.rebase true
-
-# Create directories
-mkdir -p /home/nsc/.ssh
-mkdir -p /home/nsc/.config
-mkdir -p /home/nsc/.config/polybar/
-mkdir -p /home/nsc/.config/bspwm/
-mkdir -p /home/nsc/.config/sxhkd/
-
-chown -R nsc:users /home/nsc/*
-chmod -R 755 /home/nsc
-chmod 600 /home/nsc/.ssh/*
-
 # Configure
-
 /bin/cat > /etc/profile.d/custom.sh << EOF
 export GITHUB_TOKEN=ead144bb302ec16ded4d1dc87ec92659ce9ac7da
 export GOPATH=$HOME/go
@@ -154,7 +137,6 @@ EOF
 chown root.root /etc/X11/xorg.conf.d/30-touchpad.conf
 chmod 0644 /etc/X11/xorg.conf.d/30-touchpad.conf
 
-
 /bin/cat > /etc/asound.conf << EOF
 defaults.pcm.card 1
 defaults.pcm.device 0
@@ -170,13 +152,23 @@ EOF
 chown root.root /etc/modprobe.d/hid_apple.conf
 chmod 0644 /etc/modprobe.d/hid_apple.conf
 
-/bin/cat > /home/nsc/.xinitrc << EOF
-sxhkd &
-exec bspwm
-EOF
-chown -R nsc:users /home/nsc/.xinitrc
-chmod -R 755 /home/nsc/.xinitrc
+# Configure Git
+git config --global user.email "nstrappazzonc@gmail.com"
+git config --global user.name "Nicola Strappazzon C"
+git config pull.rebase true
 
+# Create directories
+mkdir -p /home/nsc/.ssh
+mkdir -p /home/nsc/.config
+mkdir -p /home/nsc/.config/polybar/
+mkdir -p /home/nsc/.config/bspwm/
+mkdir -p /home/nsc/.config/sxhkd/
+
+chown -R nsc:users /home/nsc/*
+# chmod -R 755 /home/nsc
+chmod 600 /home/nsc/.ssh/*
+
+cp config/xinitrc /home/nsc/.xinitrc
 cp config/polybar /home/nsc/.config/polybar/config
 cp config/bspwmrc /home/nsc/.config/bspwm/bspwmrc
 cp config/sxhkdrc /home/nsc/.config/sxhkd/sxhkdrc
