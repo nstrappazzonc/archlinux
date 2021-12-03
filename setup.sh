@@ -92,13 +92,15 @@ git config --global user.name "Nicola Strappazzon C"
 git config pull.rebase true
 
 # Create directories
-mkdir ~/.ssh
-chmod 0600 ~/.ssh/*
+mkdir -p /home/nsc/.ssh
+mkdir -p /home/nsc/.config
+mkdir -p /home/nsc/.config/polybar/
+mkdir -p /home/nsc/.config/bspwm/
+mkdir -p /home/nsc/.config/sxhkd/
 
-mkdir ~/.config
-mkdir -p ~/.config/polybar/
-mkdir -p ~/.config/bspwm/
-mkdir -p ~/.config/sxhkd/
+chown -R nsc:users /home/nsc/*
+chmod -R 700 /home/nsc
+chmod 600 /home/nsc/.ssh/*
 
 # Configure
 
