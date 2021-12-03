@@ -169,3 +169,14 @@ options hid_apple iso_layout=0
 EOF
 chown root.root /etc/modprobe.d/hid_apple.conf
 chmod 0644 /etc/modprobe.d/hid_apple.conf
+
+/bin/cat > /home/nsc/.xinitrc << EOF
+sxhkd &
+exec bspwm
+EOF
+chown -R nsc:users /home/nsc/.xinitrc
+chmod -R 755 /home/nsc/.xinitrc
+
+cp config/polybar /home/nsc/.config/polybar/config
+cp config/bspwmrc /home/nsc/.config/bspwm/bspwmrc
+cp config/sxhkdrc /home/nsc/.config/sxhkd/sxhkdrc
