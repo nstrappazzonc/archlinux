@@ -85,3 +85,72 @@ fi
 # Enable services
 systemctl enable --now NetworkManager
 systemctl enable --now ntpd
+
+# Configure Git
+git config --global user.email "nstrappazzonc@gmail.com"
+git config --global user.name "Nicola Strappazzon C"
+git config pull.rebase true
+
+# Create directories
+mkdir ~/.ssh
+chmod 0600 ~/.ssh/*
+
+mkdir ~/.config
+mkdir -p ~/.config/polybar/
+mkdir -p ~/.config/bspwm/
+mkdir -p ~/.config/sxhkd/
+
+# Configure
+
+/bin/cat > /etc/profile.d/custom.sh << EOF
+export GITHUB_TOKEN=ead144bb302ec16ded4d1dc87ec92659ce9ac7da
+export GOPATH=$HOME/go
+export PATH=$PATH:$(go env GOPATH)/bin
+export EDITOR=vim
+export TERM=xterm
+export BROWSER=firefox
+
+alias ll="ls -lahS"
+EOF
+
+/bin/cat > /etc/udev/rules.d/99-removable.rules << EOF
+ACTION=="add", SUBSYSTEM=="thunderbolt", ATTR{authorized}=="0", ATTR{authorized}="1"
+EOF
+
+/bin/cat > /etc/udev/rules.d/81-backlight.rules << EOF
+# Set backlight level to 20
+SUBSYSTEM=="backlight", ACTION=="add", KERNEL=="acpi_video0", ATTR{brightness}="20"
+EOF
+
+/bin/cat > /etc/udev/rules.d/99-lowbat.rules << EOF
+# Suspend the system when battery level drops to 5% or lower
+SUBSYSTEM=="power_supply", ATTR{status}=="Discharging", ATTR{capacity}=="[0-5]", RUN+="/usr/bin/systemctl hibernate"
+EOF
+
+udevadm control --reload-rules
+
+/bin/cat > /etc/default/grub.silent << EOF
+GRUB_DEFAULT=0
+GRUB_TIMEOUT=0
+GRUB_RECORDFAIL_TIMEOUT=$GRUB_TIMEOUT
+EOF
+
+/bin/cat > /etc/X11/xorg.conf.d/30-touchpad.conf << EOF
+Section "InputClass"
+        Identifier "MyTouchpad"
+        MatchIsTouchpad "on"
+        Driver "libinput"
+        Option "Tapping" "on"
+EndSection
+EOF
+
+/bin/cat > /etc/asound.conf << EOF
+defaults.pcm.card 1
+defaults.pcm.device 0
+defaults.ctl.card 0
+EOF
+
+/bin/cat > /etc/modprobe.d/hid_apple.conf << EOF
+options hid_apple fnmode=1
+options hid_apple iso_layout=0
+EOF
