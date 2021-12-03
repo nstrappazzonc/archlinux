@@ -57,5 +57,5 @@ fi
 
 # Graphics Drivers find and install
 if lspci | grep -E "Integrated Graphics Controller"; then
-    pacman -S xf86-video-intel --needed --noconfirm
+    sudo pacman -S xf86-video-intel --needed --noconfirm
 fi
