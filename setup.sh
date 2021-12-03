@@ -52,6 +52,7 @@ if ! [ -x "$(command -v yay)" ]; then
     cd yay-git/
     makepkg -si
     sudo yay -Syu
+    rm -rf /tmp/yay-git/
     cd
 fi
 
