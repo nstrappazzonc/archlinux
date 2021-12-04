@@ -56,8 +56,8 @@ font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 
 modules-left = bspwm
-modules-center = mpd xwindow
-modules-right = xwindow filesystem xbacklight pulseaudio memory cpu wlan eth battery date
+modules-center = xwindow
+modules-right = filesystem xbacklight pulseaudio memory cpu wlan eth battery date
 
 tray-position = right
 tray-padding = 2
