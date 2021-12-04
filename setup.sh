@@ -55,6 +55,10 @@ PKGS=(
     # Fonts
     'terminus-font'
     'xorg-fonts-misc'
+    # Wifi driver
+    'broadcom-wl-dkms'
+    # Graphics driver
+    'xf86-video-intel'
     # Audio driver
     'alsa-plugins'
     'alsa-utils'
@@ -64,7 +68,7 @@ PKGS=(
     'libinput'
     'xf86-input-libinput'
     # Brightness 
-    # 'brightnessctl'
+    'brightnessctl'
 )
 
 for PKG in "${PKGS[@]}"; do
@@ -82,16 +86,13 @@ if ! [ -x "$(command -v yay)" ]; then
     cd
 fi
 
-# Graphics Drivers find and install
-if lspci | grep -E "Integrated Graphics Controller"; then
-    pacman -S xf86-video-intel --needed --noconfirm
-fi
-
-# Wifi Drivers find and install
-if lspci | grep -E "BCM4360 802.11ac Wireless Network Adapter"; then
-    pacman -S broadcom-wl-dkms --needed --noconfirm
-fi
-
 # Enable services
-systemctl enable --now NetworkManager
-systemctl enable --now ntpd
+SRVS=(
+    'NetworkManager'
+    'ntpd'
+    'sshd'
+)
+
+for SRV in "${SRVS[@]}"; do
+    systemctl enable --now "$SRV"
+done

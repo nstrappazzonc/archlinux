@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 set -e
 
+# Make sure only root can run our script
+if [[ $EUID -ne 0 ]]; then
+  echo "This script must be run as root"
+  exit 1
+fi
+
 # Add custom profile
 /bin/cat > /etc/profile.d/custom.sh << EOF
 export GOPATH=$HOME/go
@@ -65,25 +71,3 @@ options hid_apple iso_layout=0
 EOF
 chown root.root /etc/modprobe.d/hid_apple.conf
 chmod 0644 /etc/modprobe.d/hid_apple.conf
-
-# Configure Git
-git config --global user.email "nstrappazzonc@gmail.com"
-git config --global user.name "Nicola Strappazzon C"
-git config pull.rebase true
-
-# Create directories
-mkdir -p /home/nsc/.ssh
-mkdir -p /home/nsc/.config
-mkdir -p /home/nsc/.config/polybar/
-mkdir -p /home/nsc/.config/bspwm/
-mkdir -p /home/nsc/.config/sxhkd/
-
-# chmod -R 755 /home/nsc
-chmod 600 /home/nsc/.ssh/
-
-cp config/xinitrc /home/nsc/.xinitrc
-cp config/polybar /home/nsc/.config/polybar/config
-cp config/bspwmrc /home/nsc/.config/bspwm/bspwmrc
-cp config/sxhkdrc /home/nsc/.config/sxhkd/sxhkdrc
-
-chown -R nsc:users /home/nsc/
