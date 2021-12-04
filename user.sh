@@ -13,8 +13,8 @@ git config --global user.name "Nicola Strappazzon C"
 git config pull.rebase true
 
 # Configure desktop
-mkdir ~/Downloads
-mkdir ~/Pictures
+mkdir -p ~/Downloads
+mkdir -p ~/Pictures
 mkdir -p ~/.config
 mkdir -p ~/.config/polybar/
 mkdir -p ~/.config/bspwm/
