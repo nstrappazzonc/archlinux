@@ -7,20 +7,6 @@ if [[ $EUID -ne 0 ]]; then
   exit 1
 fi
 
-if [[ -z "$(locale | grep LANG | cut -d= -f2)" ]]; then
-    sed -i 's/^#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
-    locale-gen
-    timedatectl --no-ask-password set-timezone Europe/Madrid
-    timedatectl --no-ask-password set-ntp 1
-    localectl --no-ask-password set-locale LANG="en_US.UTF-8" LC_TIME="en_US.UTF-8" LANGUAGE="en_US"
-fi
-
-# Set keymaps
-localectl --no-ask-password set-keymap us
-
-# Add sudo rights
-sed -i 's/^# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/' /etc/sudoers
-
 # Update database
 pacman -Syu --noconfirm
 

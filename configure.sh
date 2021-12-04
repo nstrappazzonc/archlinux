@@ -7,6 +7,20 @@ if [[ $EUID -ne 0 ]]; then
   exit 1
 fi
 
+if [[ -z "$(locale | grep LANG | cut -d= -f2)" ]]; then
+    sed -i 's/^#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
+    locale-gen
+    timedatectl --no-ask-password set-timezone Europe/Madrid
+    timedatectl --no-ask-password set-ntp 1
+    localectl --no-ask-password set-locale LANG="en_US.UTF-8" LC_TIME="en_US.UTF-8" LANGUAGE="en_US"
+fi
+
+# Set keymaps
+localectl --no-ask-password set-keymap us
+
+# Add sudo rights
+sed -i 's/^# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/' /etc/sudoers
+
 # Add custom profile
 /bin/cat > /etc/profile.d/custom.sh << EOF
 export GOPATH=$HOME/go
@@ -15,7 +29,7 @@ export EDITOR=vim
 export TERM=xterm
 export BROWSER=firefox
 
-alias ll="ls -lahS"
+alias l="ls -lahS"
 EOF
 chown root.root /etc/profile.d/*
 chmod 0644 /etc/profile.d/*
@@ -35,8 +49,6 @@ SUBSYSTEM=="power_supply", ATTR{status}=="Discharging", ATTR{capacity}=="[0-5]",
 EOF
 chown root.root /etc/udev/rules.d/*
 chmod 0644 /etc/udev/rules.d/*
-
-udevadm control --reload-rules
 
 /bin/cat > /etc/default/grub.silent << EOF
 GRUB_DEFAULT=0
@@ -71,3 +83,6 @@ options hid_apple iso_layout=0
 EOF
 chown root.root /etc/modprobe.d/hid_apple.conf
 chmod 0644 /etc/modprobe.d/hid_apple.conf
+
+# Update rules
+udevadm control --reload-rules
