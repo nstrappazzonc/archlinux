@@ -58,7 +58,6 @@ PKGS=(
     'ttf-inconsolata'
     'ttf-roboto'
     'ttf-font-awesome'
-    'ttf-unifont'
     # Wifi driver
     'broadcom-wl-dkms'
     # Graphics driver
