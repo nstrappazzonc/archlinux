@@ -23,7 +23,7 @@ super + Escape
 #
 
 # quit bspwm
-super + alt + control + escape
+super + alt + control + Escape
 	bspc quit
 
 # restart bspwm
