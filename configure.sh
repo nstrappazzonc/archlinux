@@ -38,7 +38,8 @@ shortcuts () {
  - Ctrl + Shift + C: Copy
  - Ctrl + Shift + V: Paste
  - Super + Alt + Ctrl + l: Lock screen
- - Super + Alt + r: Reload bspwm
+ - Super + Alt + Ctrl + r: Reload bspwm
+ - Super + Alt + Ctrl + Esc: Exit bspwm
  - Super + Alt + {h,j,k,l}: Move windows
  - Super + e: Emoji launcher
  - Super + Escape: Reload sxhkd

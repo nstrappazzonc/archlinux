@@ -22,12 +22,16 @@ super + Escape
 # bspwm hotkeys
 #
 
-# quit/restart bspwm
-super + alt + {q,r}
-	bspc {quit,wm -r}
+# quit bspwm
+super + alt + control + escape
+	bspc quit
+
+# restart bspwm
+super + alt + control + r
+	bspc wm -r
 
 # close and kill
-super + {_,shift + }w
+super + q
 	bspc node -{c,k}
 
 # alternate between the tiled and monocle layout
