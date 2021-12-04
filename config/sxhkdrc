@@ -154,5 +154,5 @@ super + shift + s
 #
 # Lock Screen
 #
-super + shift + l
+super + shift + control + l
 	slock
