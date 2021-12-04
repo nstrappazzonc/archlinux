@@ -38,6 +38,8 @@ PKGS=(
     'rofi'
     'sakura'
     'sxhkd'
+    # Desktop Apps
+    'flameshot'
     # Fonts
     'terminus-font'
     'xorg-fonts-misc'
