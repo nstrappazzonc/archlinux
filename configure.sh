@@ -31,6 +31,28 @@ export TERM=xterm
 export BROWSER=firefox
 
 alias l="ls -lahS"
+
+shortcuts () {
+  echo "Shortcuts
+=========
+ - Ctrl + Shift + C: Copy
+ - Ctrl + Shift + V: Paste
+ - Super + Alt + Ctrl + l: Lock screen
+ - Super + Alt + r: Reload bspwm
+ - Super + Alt + {h,j,k,l}: Move windows
+ - Super + e: Emoji launcher
+ - Super + Escape: Reload sxhkd
+ - Super + Return: Terminal
+ - Super + Shift + s: Take screenshot
+ - Super + Shift + w: Close window
+ - Super + Space: Program launcher
+ - F1: Brightnes down
+ - F2: Brightnes up
+ - F10: Volume mote
+ - F11: Volume down
+ - F12: Volume up
+  "
+}
 EOF
 chown root.root /etc/profile.d/*
 chmod 0644 /etc/profile.d/*
