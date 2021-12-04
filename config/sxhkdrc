@@ -124,7 +124,7 @@ super + {Left,Down,Up,Right}
 # Brightness control 
 #
 F1
-	brightnessctl set 5%
+	brightnessctl set 5%-
 
 F2
 	brightnessctl set +5%

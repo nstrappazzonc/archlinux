@@ -175,11 +175,11 @@ mkdir -p /home/nsc/.config/bspwm/
 mkdir -p /home/nsc/.config/sxhkd/
 
 # chmod -R 755 /home/nsc
-chmod 600 /home/nsc/.ssh/*
+chmod 600 /home/nsc/.ssh/
 
 cp config/xinitrc /home/nsc/.xinitrc
 cp config/polybar /home/nsc/.config/polybar/config
 cp config/bspwmrc /home/nsc/.config/bspwm/bspwmrc
 cp config/sxhkdrc /home/nsc/.config/sxhkd/sxhkdrc
 
-chown -R nsc:users /home/nsc/*
+chown -R nsc:users /home/nsc/
