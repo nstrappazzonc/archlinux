@@ -44,6 +44,7 @@ PKGS=(
     'slock'
     # Desktop Apps
     'firefox'
+    'firejail'
     'flameshot'
     # Fonts
     'terminus-font'

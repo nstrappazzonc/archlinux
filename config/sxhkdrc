@@ -14,6 +14,10 @@ super + @space
 super + e
 	rofi -show emoji -modi emoji -theme solarized
 
+# launch firefox
+super + shift + b
+	firejail --dns=1.1.1.1 firefox --no-remote
+
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd
