@@ -56,7 +56,6 @@ PKGS=(
     'ttf-liberation'
     'ttf-droid'
     'ttf-inconsolata'
-    'ttf-font-icons'
     'ttf-roboto'
     'ttf-font-awesome'
     'ttf-unifont'
