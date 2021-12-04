@@ -59,9 +59,12 @@ PKGS=(
     'alsa-plugins'
     'alsa-utils'
     'pulseaudio-alsa'
+    'pulsemixer'
     # Touchpad driver
     'libinput'
     'xf86-input-libinput'
+    # Brightness 
+    # 'brightnessctl'
 )
 
 for PKG in "${PKGS[@]}"; do
@@ -82,6 +85,11 @@ fi
 # Graphics Drivers find and install
 if lspci | grep -E "Integrated Graphics Controller"; then
     pacman -S xf86-video-intel --needed --noconfirm
+fi
+
+# Wifi Drivers find and install
+if lspci | grep -E "BCM4360 802.11ac Wireless Network Adapter"; then
+    pacman -S broadcom-wl-dkms --needed --noconfirm
 fi
 
 # Enable services
@@ -107,8 +115,8 @@ ACTION=="add", SUBSYSTEM=="thunderbolt", ATTR{authorized}=="0", ATTR{authorized}
 EOF
 
 /bin/cat > /etc/udev/rules.d/81-backlight.rules << EOF
-# Set backlight level to 20
-SUBSYSTEM=="backlight", ACTION=="add", KERNEL=="acpi_video0", ATTR{brightness}="20"
+ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", GROUP="video", MODE="0664"
+SUBSYSTEM=="backlight", ACTION=="add", KERNEL=="intel_backlight", ATTR{brightness}="10"
 EOF
 
 /bin/cat > /etc/udev/rules.d/99-lowbat.rules << EOF
@@ -166,7 +174,6 @@ mkdir -p /home/nsc/.config/polybar/
 mkdir -p /home/nsc/.config/bspwm/
 mkdir -p /home/nsc/.config/sxhkd/
 
-chown -R nsc:users /home/nsc/*
 # chmod -R 755 /home/nsc
 chmod 600 /home/nsc/.ssh/*
 
@@ -174,3 +181,5 @@ cp config/xinitrc /home/nsc/.xinitrc
 cp config/polybar /home/nsc/.config/polybar/config
 cp config/bspwmrc /home/nsc/.config/bspwm/bspwmrc
 cp config/sxhkdrc /home/nsc/.config/sxhkd/sxhkdrc
+
+chown -R nsc:users /home/nsc/*
