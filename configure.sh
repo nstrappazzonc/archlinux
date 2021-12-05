@@ -29,8 +29,14 @@ export PATH=$PATH:$(go env GOPATH)/bin
 export EDITOR=vim
 export TERM=xterm
 export BROWSER=firefox
+export CLICOLOR=1
+export LS_COLORS="di=1:fi=0:ln=31:pi=5:so=5:bd=5:cd=5:or=31"
+export PS1="\[\033[32m\]\W\[\033[31m\]\[\033[32m\]$\[\e[0m\]"
 
+alias ls="ls --color=auto"
 alias l="ls -lahS"
+alias grep="grep -n --color"
+alias diff="diff --color=auto"
 
 shortcuts () {
   echo "Shortcuts
