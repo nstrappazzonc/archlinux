@@ -28,3 +28,5 @@ cp config/polybar ~/.config/polybar/config
 cp config/sakura ~/.config/sakura/sakura.conf
 cp config/sxhkdrc ~/.config/sxhkd/sxhkdrc
 cp config/xinitrc ~/.xinitrc
+
+cp wallpapers/montserrat.jpg ~/Pictures/montserrat.jpg

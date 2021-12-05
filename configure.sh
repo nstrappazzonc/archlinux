@@ -120,3 +120,6 @@ chmod 0644 /etc/modprobe.d/hid_apple.conf
 
 # Update rules
 udevadm control --reload-rules
+
+# Update font information
+fc-cache

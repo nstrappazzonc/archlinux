@@ -12,3 +12,4 @@ bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 
 polybar -c /home/nsc/.config/polybar/config main
+feh --bg-fill /home/nsc/Pictures/montserrat.jpg
