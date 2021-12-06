@@ -54,6 +54,7 @@ shortcuts () {
  - Super + Return: Terminal
  - Super + Shift + s: Take screenshot
  - Super + Shift + w: Close window
+ - Super + Shift + {1,2,3,...}: Sent to window
  - Super + Space: Program launcher
  - F1: Brightnes down
  - F2: Brightnes up
