@@ -7,6 +7,22 @@ if [[ $EUID -eq 0 ]]; then
   exit 1
 fi
 
+/bin/cat > ~/.bashrc << EOF
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+if test -d /etc/profile.d/; then
+  for profile in /etc/profile.d/*.sh; do
+    test -r "$profile && . $profile"
+  done
+  unset profile
+fi
+EOF
+
 # Configure Git
 git config --global user.email "nstrappazzonc@gmail.com"
 git config --global user.name "Nicola Strappazzon C"
