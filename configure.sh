@@ -38,6 +38,8 @@ alias l="ls -lahS"
 alias grep="grep -n --color"
 alias diff="diff --color=auto"
 
+setxkbmap -option compose:ralt
+
 shortcuts () {
   echo "Shortcuts
 =========
@@ -58,6 +60,7 @@ shortcuts () {
  - F10: Volume mote
  - F11: Volume down
  - F12: Volume up
+ - Left Alt + ' + {a,e,i,o,u}: á,é,í,ó,ú
   "
 }
 EOF
