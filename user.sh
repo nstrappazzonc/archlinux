@@ -7,20 +7,13 @@ if [[ $EUID -eq 0 ]]; then
   exit 1
 fi
 
-/bin/cat > ~/.bashrc << EOF
+/bin/cat > ~/.bash_profile << EOF
 #
-# ~/.bashrc
+# ~/.bash_profile
 #
 
-# If not running interactively, don't do anything
-[[ $- != *i* ]] && return
-
-if test -d /etc/profile.d/; then
-  for profile in /etc/profile.d/*.sh; do
-    test -r "$profile" && . "$profile"
-  done
-  unset profile
-fi
+[[ -f /etc/profile.d/custom.sh ]] && source /etc/profile.d/custom.sh
+[[ -f ~/.bashrc ]] && . ~/.bashrc
 EOF
 
 # Configure Git

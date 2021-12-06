@@ -1,6 +1,6 @@
 # terminal emulator
 super + Return
-	sakura
+	sakura -e bash --login
 
 # program launcher
 super + @space
