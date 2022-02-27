@@ -133,3 +133,7 @@ udevadm control --reload-rules
 
 # Update font information
 fc-cache
+
+# Systemd
+cp config/logind /etc/systemd/logind.conf
+
