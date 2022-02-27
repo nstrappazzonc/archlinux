@@ -1,3 +1,4 @@
 sxhkd &
 flameshot &
+setxkbmap -option compose:ralt &
 exec bspwm

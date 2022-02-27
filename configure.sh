@@ -38,7 +38,7 @@ alias l="ls -lahS"
 alias grep="grep -n --color"
 alias diff="diff --color=auto"
 
-setxkbmap -option compose:ralt
+# setxkbmap -option compose:ralt
 
 shortcuts () {
   echo "Shortcuts
